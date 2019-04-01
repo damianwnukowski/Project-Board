@@ -7,8 +7,8 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: "#ffffff" }, // Purple and green play nicely together.
-    secondary: { main: "#3fc1c9" } // This is just green.A700 as hex.
+    primary: { main: "#3fc1c9" }, // Purple and green play nicely together.
+    secondary: { main: "#B60B68" } // This is just green.A700 as hex.
   }
 });
 

@@ -6,32 +6,57 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import Logo from "../images/logo_transparent.png";
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1
+  },
+  appBar: {
+    backgroundColor: "white"
   },
   grow: {
     flex: 1
   },
-  margin: {
+  signIn: {
     "margin-left": "auto"
   },
   img: {
     height: "80px"
+  },
+  signUp: {
+    marginLeft: theme.spacing.unit
   }
-};
+});
 
 function Navbar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <img className={classes.img} alt="" src={Logo} />
-          <Button className={classes.margin} color="inherit" border={1}>
-            Login
+          <a href="/">
+            <img
+              className={classes.img}
+              alt=""
+              src={Logo}
+              href="/ProjectBoard"
+            />
+          </a>
+          <Button
+            href="/SignIn"
+            className={classes.signIn}
+            color="inherit"
+            border={1}
+          >
+            Sign In
           </Button>
-          <Button color="inherit">Sign up</Button>
+          <Button
+            variant="contained"
+            href="/SignUp"
+            color="secondary"
+            className={classes.signUp}
+          >
+            Sign up
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

@@ -6,23 +6,42 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Grid from "@material-ui/core/Grid";
 import ProjectCard from "./ProjectCard";
+import AddIcon from "@material-ui/icons/Add";
+import Fab from "@material-ui/core/Fab";
+import { isAbsolute } from "path";
+import { Modal, Typography } from "@material-ui/core";
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1
   },
   grid: {
-    padding: 10
+    padding: theme.spacing.unit,
+    margin: 0, //
+    width: "100%" // margin and width changed due to unintended scrollbar
+  },
+  appBar: {
+    backgroundColor: "#ffffff"
+  },
+  fab: {
+    position: "absolute",
+    bottom: theme.spacing.unit * 5,
+    right: theme.spacing.unit * 5
   }
-};
+});
 
 class ProjectBoard extends React.Component {
   state = {
-    value: 0
+    value: 0,
+    modalOpened: false
   };
 
   handleChange = (event, value) => {
     this.setState({ value });
+  };
+
+  handleFabOnClick = () => {
+    this.setState({ value: 0, modalOpened: true });
   };
 
   render() {
@@ -31,7 +50,7 @@ class ProjectBoard extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" className={classes.appBar}>
           <Tabs value={value} onChange={this.handleChange}>
             <Tab label="To do" />
             <Tab label="In progress" />
@@ -50,6 +69,16 @@ class ProjectBoard extends React.Component {
         )}
         {value === 1 && <Grid>In progress</Grid>}
         {value === 2 && <Grid>Done</Grid>}
+        <Fab
+          onClick={this.handleFabOnClick}
+          color="secondary"
+          className={classes.fab}
+        >
+          <AddIcon />
+        </Fab>
+        <Modal open={this.state.modalOpened}>
+          <Typography>Test</Typography>
+        </Modal>
       </div>
     );
   }
