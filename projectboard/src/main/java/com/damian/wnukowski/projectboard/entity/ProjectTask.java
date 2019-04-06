@@ -1,4 +1,4 @@
-package com.damian.wnukowski.projectboard.entities;
+package com.damian.wnukowski.projectboard.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,9 +17,7 @@ public class ProjectTask {
     private String acceptanceCriteria;
     private String status;
 
-    public ProjectTask(){
-
-    }
+    public ProjectTask(){}
 
     public Long getId() {
         return id;

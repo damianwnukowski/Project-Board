@@ -11,7 +11,7 @@
     <groupId>com.damian.wnukowski</groupId>
     <artifactId>projectboard</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>projectboard</name>
+    <name>Project Board</name>
     <description>Project board</description>
 
     <properties>
