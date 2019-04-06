@@ -1,6 +1,6 @@
 package com.damian.wnukowski.projectboard.web;
 
-import com.damian.wnukowski.projectboard.domain.ProjectTask;
+import com.damian.wnukowski.projectboard.entities.ProjectTask;
 import com.damian.wnukowski.projectboard.service.ProjectTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

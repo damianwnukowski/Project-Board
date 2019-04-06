@@ -1,6 +1,6 @@
 package com.damian.wnukowski.projectboard.repository;
 
-import com.damian.wnukowski.projectboard.domain.ProjectTask;
+import com.damian.wnukowski.projectboard.entities.ProjectTask;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

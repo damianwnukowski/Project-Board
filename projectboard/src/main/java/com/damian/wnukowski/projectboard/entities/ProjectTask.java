@@ -1,4 +1,4 @@
-package com.damian.wnukowski.projectboard.domain;
+package com.damian.wnukowski.projectboard.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

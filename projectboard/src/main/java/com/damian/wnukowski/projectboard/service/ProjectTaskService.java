@@ -1,6 +1,6 @@
 package com.damian.wnukowski.projectboard.service;
 
-import com.damian.wnukowski.projectboard.domain.ProjectTask;
+import com.damian.wnukowski.projectboard.entities.ProjectTask;
 import com.damian.wnukowski.projectboard.repository.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
