@@ -1,32 +1,31 @@
 package com.damian.wnukowski.projectboard.entity;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.Size;
+
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private long id;
 
+    @NaturalId
+    @Size(min = 4, max = 20)
     private String username;
+    @Size(min = 4, max = 72)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL) //If user doesn't exist we don't need his abandoned projects
-    private List<ProjectTask> projectTasks;
 
-    public User(String username, String password, List<ProjectTask> projectTasks) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.projectTasks = projectTasks;
     }
 
     public long getId() {
-        return Id;
-    }
-
-    public void setId(long id) {
-        Id = id;
+        return id;
     }
 
     public String getUsername() {
@@ -45,11 +44,4 @@ public class User {
         this.password = password;
     }
 
-    public List<ProjectTask> getProjectTasks() {
-        return projectTasks;
-    }
-
-    public void setProjectTasks(List<ProjectTask> projectTasks) {
-        this.projectTasks = projectTasks;
-    }
 }

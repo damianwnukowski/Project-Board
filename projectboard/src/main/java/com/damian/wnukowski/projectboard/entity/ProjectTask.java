@@ -1,9 +1,6 @@
 package com.damian.wnukowski.projectboard.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -16,6 +13,9 @@ public class ProjectTask {
     private String summary;
     private String acceptanceCriteria;
     private String status;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User owner;
 
     public ProjectTask(){}
 
