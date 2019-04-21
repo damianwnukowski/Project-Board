@@ -1,5 +1,6 @@
 package com.damian.wnukowski.projectboard.entity;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -14,8 +15,9 @@ public class ProjectTask {
     private String acceptanceCriteria;
     private String status;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private User owner;
+
 
     public ProjectTask(){}
 
@@ -49,5 +51,13 @@ public class ProjectTask {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

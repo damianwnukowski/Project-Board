@@ -1,9 +1,11 @@
 package com.damian.wnukowski.projectboard.entity;
 
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 
 @Entity
@@ -18,6 +20,8 @@ public class User {
     @Size(min = 4, max = 72)
     private String password;
 
+
+    public User(){}
 
     public User(String username, String password) {
         this.username = username;
