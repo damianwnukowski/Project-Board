@@ -8,7 +8,6 @@ import Grid from "@material-ui/core/Grid";
 import ProjectCard from "./ProjectCard";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
-import { isAbsolute } from "path";
 import { Modal, Typography } from "@material-ui/core";
 
 const styles = theme => ({
