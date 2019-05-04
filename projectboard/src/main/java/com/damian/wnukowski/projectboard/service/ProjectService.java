@@ -1,6 +1,6 @@
 package com.damian.wnukowski.projectboard.service;
 
-import com.damian.wnukowski.projectboard.entity.ProjectTask;
+import com.damian.wnukowski.projectboard.entity.Project;
 import com.damian.wnukowski.projectboard.repository.ProjectTaskRepository;
 import com.damian.wnukowski.projectboard.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,34 +9,34 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class ProjectTaskService {
+public class ProjectService {
 
     private final ProjectTaskRepository projectTaskRepository;
     private final UserRepository userRepository;
 
     @Autowired
-    public ProjectTaskService(ProjectTaskRepository projectTaskRepository, UserRepository userRepository) {
+    public ProjectService(ProjectTaskRepository projectTaskRepository, UserRepository userRepository) {
         this.projectTaskRepository = projectTaskRepository;
         this.userRepository = userRepository;
     }
 
-    public ProjectTask saveOrUpdateProjectTask(ProjectTask projectTask){
+    public Project saveOrUpdateProjectTask(Project project){
 
-        if(projectTask.getStatus()==null || projectTask.getStatus().equals("")){
-            projectTask.setStatus("TO_DO");
+        if(project.getStatus()==null || project.getStatus().equals("")){
+            project.setStatus("TO_DO");
         }
 
-        projectTask.setOwner(getUser());
+        project.setOwner(getUser());
 
-        return projectTaskRepository.save(projectTask);
+        return projectTaskRepository.save(project);
     }
 
-    public Iterable<ProjectTask> findAllProjectTasks(){
+    public Iterable<Project> findAllProjectTasks(){
         com.damian.wnukowski.projectboard.entity.User owner = getUser();
         return projectTaskRepository.findAllByOwner(owner);
     }
 
-    public ProjectTask findById(Long id){
+    public Project findById(Long id){
         com.damian.wnukowski.projectboard.entity.User owner = getUser();
         return projectTaskRepository.findByIdAndOwner(id, owner);
 

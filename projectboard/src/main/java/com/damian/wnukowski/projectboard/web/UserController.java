@@ -29,14 +29,13 @@ public class UserController {
 
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@Valid @RequestBody User user, BindingResult result){
-        if(result.hasErrors()){ //TODO same approach as in ProjectTaskController, will change to fulfill DRY
+        if(result.hasErrors()){
             Map<String, String> errors = new HashMap<>();
             for(FieldError error : result.getFieldErrors()){
                 errors.put(error.getField(), error.getDefaultMessage());
             }
             return new ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
         }
-
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.CREATED); //We don't want to send user and his password (even though hashed) back

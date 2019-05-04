@@ -12,5 +12,4 @@ public class ProjectboardApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

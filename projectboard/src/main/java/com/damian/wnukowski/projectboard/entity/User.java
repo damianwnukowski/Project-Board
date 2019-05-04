@@ -1,11 +1,12 @@
 package com.damian.wnukowski.projectboard.entity;
 
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+import com.sun.org.glassfish.gmbal.ManagedAttribute;
 import org.hibernate.annotations.NaturalId;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -20,8 +21,21 @@ public class User {
     @Size(min = 4, max = 72)
     private String password;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
+    )
+    private Set<Role> roles;
 
-    public User(){}
+    @ManyToMany(mappedBy = "members")
+    private List<ProjectGroup> projectGroups;
+
+    @OneToMany(mappedBy = "owner")
+    private List<ProjectGroup> ownedProjectGroups;
+
+    User(){}
 
     public User(String username, String password) {
         this.username = username;
@@ -48,4 +62,27 @@ public class User {
         this.password = password;
     }
 
+    public Set<Role> getRoles(){
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles){
+        this.roles = roles;
+    }
+
+    public void setProjectGroups(List<ProjectGroup> projectGroups){
+        this.projectGroups = projectGroups;
+    }
+
+    public List<ProjectGroup> getProjectGroups(){
+        return projectGroups;
+    }
+
+    public List<ProjectGroup> getOwnedProjectGroups() {
+        return ownedProjectGroups;
+    }
+
+    public void setOwnedProjectGroups(List<ProjectGroup> ownedProjectGroups) {
+        this.ownedProjectGroups = ownedProjectGroups;
+    }
 }
