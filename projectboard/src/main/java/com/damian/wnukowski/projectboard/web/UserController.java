@@ -2,6 +2,7 @@ package com.damian.wnukowski.projectboard.web;
 
 import com.damian.wnukowski.projectboard.entity.User;
 import com.damian.wnukowski.projectboard.repository.UserRepository;
+import com.damian.wnukowski.projectboard.util.BindingResultErrorMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,23 +20,22 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    private UserRepository userRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BindingResultErrorMapper bindingResultErrorMapper;
 
-    public UserController(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder){
+    public UserController(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
+                          BindingResultErrorMapper bindingResultErrorMapper){
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.bindingResultErrorMapper = bindingResultErrorMapper;
     }
 
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@Valid @RequestBody User user, BindingResult result){
-        if(result.hasErrors()){
-            Map<String, String> errors = new HashMap<>();
-            for(FieldError error : result.getFieldErrors()){
-                errors.put(error.getField(), error.getDefaultMessage());
-            }
-            return new ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
-        }
+        ResponseEntity<?> res = bindingResultErrorMapper.mapBindingResults(result);
+        if(res!=null) return res;
+
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.CREATED); //We don't want to send user and his password (even though hashed) back

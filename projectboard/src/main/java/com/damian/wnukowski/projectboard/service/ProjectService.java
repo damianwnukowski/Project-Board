@@ -1,6 +1,7 @@
 package com.damian.wnukowski.projectboard.service;
 
 import com.damian.wnukowski.projectboard.entity.Project;
+import com.damian.wnukowski.projectboard.entity.User;
 import com.damian.wnukowski.projectboard.repository.ProjectTaskRepository;
 import com.damian.wnukowski.projectboard.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,10 @@ public class ProjectService {
     public Project saveOrUpdateProjectTask(Project project){
 
         if(project.getStatus()==null || project.getStatus().equals("")){
-            project.setStatus("TO_DO");
+            project.setStatus(Project.Status.TO_DO);
         }
 
-        project.setOwner(getUser());
+        
 
         return projectTaskRepository.save(project);
     }

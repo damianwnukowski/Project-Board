@@ -26,12 +26,6 @@ public class StatusHistory {
 
     StatusHistory(){}
 
-    public StatusHistory(Date time, String username, String description, Project.Status status){
-        this.time = time;
-        this.username = username;
-        this.description = description;
-        this.status = status;
-    }
 
     public Date getTime() {
         return time;

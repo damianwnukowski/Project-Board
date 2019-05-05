@@ -5,6 +5,7 @@ import com.damian.wnukowski.projectboard.util.StringListConverter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,9 +27,9 @@ public class Project {
     private Status status;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private List<StatusHistory> statusHistory;
+    private List<StatusHistory> statusHistory = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "projects")
     private ProjectGroup projectGroup;
 
 
@@ -72,4 +73,19 @@ public class Project {
         this.status = status;
     }
 
+    public List<StatusHistory> getStatusHistory() {
+        return statusHistory;
+    }
+
+    public void setStatusHistory(List<StatusHistory> statusHistory) {
+        this.statusHistory = statusHistory;
+    }
+
+    public ProjectGroup getProjectGroup() {
+        return projectGroup;
+    }
+
+    public void setProjectGroup(ProjectGroup projectGroup) {
+        this.projectGroup = projectGroup;
+    }
 }

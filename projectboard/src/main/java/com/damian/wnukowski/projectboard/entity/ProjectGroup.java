@@ -5,6 +5,7 @@ import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,9 @@ public class ProjectGroup {
             inverseJoinColumns = {@JoinColumn(name = "member_id", referencedColumnName = "id")}
     )
     private List<User> members;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Project> projects;
 
     @NaturalId
     @NotEmpty
@@ -54,5 +58,13 @@ public class ProjectGroup {
 
     public void setProjectGroupName(String projectGroupName) {
         this.projectGroupName = projectGroupName;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }
